@@ -1,0 +1,2 @@
+# typescript
+Repositório sobre TypeScript
