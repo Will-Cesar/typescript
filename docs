@@ -1,0 +1,10 @@
+comandos:
+
+tsc -v: verifica a versão do typescript instalado;
+tsc --init: configura o arquivo de inicio do tsc;
+tsc nome-do-arquivo.ts: compila o código ts para js puro de forma manual, e cria um arquivo .js na mesma pasta;
+
+Compilar de forma automatica
+- baixar o code runner no vscode
+- instalar o ts-node - npm i -g ts-node
+- ctrl + alt + n -> executa o code runner e compila os arquivos. Usar esse código no arquivo que deseja ser compilado
