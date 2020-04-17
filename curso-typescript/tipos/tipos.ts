@@ -122,3 +122,56 @@ let funcionarios2: Funcionario = {
 // ======= Union Types ======= // 
 // utiliza o '|' para 'ou', podendo ser dois tipos na mesma variável
 let nota: number | string = 10
+
+// ======= Null ======= //
+let altura: null | number = 12
+
+
+// ======= desafio ======= //
+/*
+Tipar os valores a seguir
+
+let contaBancaria = {
+    saldo: 3456,
+    depositar(valor) {
+        this.saldo += valor
+    }
+}
+
+let correntista = {
+    nome: 'Ana Silva',
+    contaBancaria: contaBancaria,
+    contatos: ['34567890', '98765432']
+}
+
+correntista.contaBancaria.depositar(3000)
+console.log(correntista)
+
+*/
+
+type ContaBancaria = {
+    saldo: number,
+    depositar: (valor: number) => void
+}
+
+let contaBancaria2: ContaBancaria = {
+    saldo: 3456,
+    depositar(valor) {
+        this.saldo += valor
+    }
+}
+
+type Correntista = {
+    nome: string,
+    contaBancaria: ContaBancaria,
+    contatos: string[]
+}
+
+let correntista2: Correntista = {
+    nome: 'Ana Silva',
+    contaBancaria: contaBancaria2,
+    contatos: ['34567890', '98765432']
+}
+
+correntista2.contaBancaria.depositar(3000)
+console.log(correntista2)

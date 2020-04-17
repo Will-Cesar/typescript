@@ -97,3 +97,18 @@ var funcionarios2 = {
 // ======= Union Types ======= // 
 // utiliza o '|' para 'ou', podendo ser dois tipos na mesma variável
 var nota = 10;
+// ======= Null ======= //
+var altura = 12;
+var contaBancaria2 = {
+    saldo: 3456,
+    depositar: function (valor) {
+        this.saldo += valor;
+    }
+};
+var correntista2 = {
+    nome: 'Ana Silva',
+    contaBancaria: contaBancaria2,
+    contatos: ['34567890', '98765432']
+};
+correntista2.contaBancaria.depositar(3000);
+console.log(correntista2);
