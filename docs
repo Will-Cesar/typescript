@@ -12,7 +12,7 @@ Compilar de forma automatica
 
 live server:
 - pacote para criar uma servidor e rodar com o protocolo http
-- npm i -s live-server 
+- npm i -s live-server  
 - ir no package.json, dentro dos "scripts" -> "start" colocar o "live-server"
 - npm start roda o servidor
 
