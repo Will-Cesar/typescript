@@ -1,4 +1,16 @@
 "use strict";
+// ======= Classe ======= //
+// classe no es6 é um detalhe de sintaxe, é uma forma diferente de escrever uma função voltada a orientação a objeto
+// Ex:
+class Data {
+    constructor(dia, mes, ano) {
+        this.dia = dia;
+        this.mes = mes;
+        this.ano = ano;
+    }
+}
+const aniversario = new Data(3, 11, 1991);
+console.log(aniversario);
 // ======= noEmitOnError ======= // 
 // propriedade setada no tsconfig.json permite ou não a compilação do arquivo caso tenha erro 
 // "noEmitOnError": true ou false 
@@ -21,11 +33,11 @@
 // ======= Arrow Function ======= //
 // tem como objetivo principal obter uma sinxate reduzida da função
 // Ex:
-var subtrair = function (N1, N2) {
+const subtrair = (N1, N2) => {
     return N1 - N2;
 };
 // ou de forma simplificada
-var subtrair2 = function (N1, N2) { return N1 - N2; };
+const subtrair2 = (N1, N2) => N1 - N2;
 console.log(subtrair2(2, 3));
 // O contexto de "This" varia entre funções normais e arrow function
 // em uma função "normal", o valor do "this" é oq se apresenta dentro do escopo da função
@@ -34,8 +46,7 @@ console.log(subtrair2(2, 3));
 // é possível passar um valor padrão no parâmetro da função para quando for chamada sem o uso dele, assumir aquele valor definido
 // caso passe um valor, o mesmo será o novo valor assumido
 // Ex:
-var contagemRegressiva = function (inicio) {
-    if (inicio === void 0) { inicio = 3; }
+const contagemRegressiva = (inicio = 3) => {
     while (inicio > 0) {
         inicio--;
         console.log(inicio);
@@ -45,34 +56,75 @@ var contagemRegressiva = function (inicio) {
 contagemRegressiva();
 contagemRegressiva(5);
 // ======= Rest & Spread ======= //  
-// separa os valores e espalha os mesmos
+// Rest = agrupa N dados 
+// Spread = espalha os dados
 // Ex:
-var numbers = [1, 10, 99, -5, 200, 1034];
-console.log(Math.max.apply(Math, numbers));
+const numbers = [1, 10, 99, -5, 200, 1034];
+console.log(Math.max(...numbers));
 // o caso de cima obtém o mesmo resultado desse ==> console.log(Math.max(numbers[0], numbers[1], numbers[2], numbers[3]))
-// também existe a possibilidade de passar N parâmetros graças ao spread
+// também existe a possibilidade de passar N parâmetros graças ao Rest, assim agrupando os números
 // Ex:
-var retornarArray = function () {
-    var args = [];
-    for (var _i = 0; _i < arguments.length; _i++) {
-        args[_i] = arguments[_i];
-    }
+const retornarArray = (...args) => {
     return args;
 };
-retornarArray(1, 2, 3, 4, 5, 6, 7, 8);
-var a = 'Teste TS!';
+const numeros = retornarArray(1, 2, 3, 4, 5, 6, 7, 8);
+console.log(numeros);
+// ======= Destructuring Array ======= //  
+// o "destructuring" no array tem como função deixar o código mais prático e curto
+// Ex:
+const caracteristicas = ['Motor Zetec 1.8', 2020, 30];
+const [motor, ano] = caracteristicas;
+console.log(motor);
+console.log(ano);
+// o código abaixo é exatamente o mesmo, mas sem o recurso de destructuring 
+// const motor = [caracteristicas[0]];
+// const ano = [caracteristicas[0]];
+// ======= Destructuring Objeto ======= //      
+const item = {
+    nome: 'SSD',
+    preco: 200,
+    caracteristicas: {
+        w: 'Importado'
+    }
+};
+const { nome: n, preco, caracteristicas: { w } } = item;
+console.log(n);
+console.log(preco);
+console.log(w);
+// nome: n ==> o 'n' é um alias, um apelido, ja que a variável 'nome' ja está sendo usada no contexto atual
+// o código abaixo é exatamente o mesmo, mas sem o recurso de destructuring 
+// const nome = item.nome;
+// const preco = item.preco;    
+// ======= Promises ======= //  
+// "promise" é uma promessa, algo que chegará no futuro
+// é uma das formas para trabalhar com assincronismo
+// Ex:
+function esperar3sPromise() {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve('3s depois promise...');
+        }, 3000);
+    });
+}
+esperar3sPromise().then(dado => console.log(dado));
+// Ex de request usando promise:
+fetch('https://swapi.dev/api/people/1')
+    .then(res => res.json())
+    .then(dados => console.log(dados))
+    .catch(err => console.log('Catch: ' + err));
+const a = 'Teste TS!';
 console.log(a);
 // ======= string ======= //
-var nome = 'João';
+let nome = 'João';
 console.log(nome);
 // ======= number ======= //
-var idade = 27;
+let idade = 27;
 console.log(idade);
 // ======= boolean ======= //
-var possuiHobbies = false;
+let possuiHobbies = false;
 console.log(possuiHobbies);
 // ======= tipos explicitos ======= //
-var minhaIdade;
+let minhaIdade;
 minhaIdade = 27;
 console.log(typeof minhaIdade);
 minhaIdade = 'idade é 27';
@@ -82,12 +134,12 @@ console.log(typeof minhaIdade);
    determina o tipo da mesma conforme a declaração de valores na propria variável.
 */
 // ======= array ======= //
-var hobbies = ['Cozinhar', 'Praticar Esportes'];
+let hobbies = ['Cozinhar', 'Praticar Esportes'];
 console.log(hobbies);
 console.log(typeof hobbies);
 hobbies = [100, 200];
 // ======= tuplas ======= //
-var endereco = ['Av Principal', 99];
+let endereco = ['Av Principal', 99];
 console.log(endereco);
 // ======= enums ======= //
 // estrutura que define valores pré-definidos
@@ -99,10 +151,10 @@ var Cor;
     Cor[Cor["Verde"] = 1] = "Verde";
     Cor[Cor["Azul"] = 2] = "Azul"; // = 2
 })(Cor || (Cor = {}));
-var minhaCor = Cor.Verde;
+let minhaCor = Cor.Verde;
 console.log(minhaCor);
 // ======= any ======= //
-var carro = 'BMW';
+let carro = 'BMW';
 console.log(carro);
 // ======= funções ======= //
 function retornaMeuNome() {
@@ -118,13 +170,13 @@ function multiplicar(numA, numB) {
 console.log(multiplicar(4, 8));
 // ======= tipo função ======= //
 // nessa demonstração, foi tipado em uma variável uma função
-var calculo;
+let calculo;
 calculo = multiplicar;
 console.log(calculo(5, 6));
 // ======= objetos ======= //
 // conforme toda a regra de typescript, uma vez criado um objeto, ja inicializando a variável com propriedades pré definidas
 // essa váriavel fica com a tipagem já definida
-var usuario = {
+let usuario = {
     nome: 'João',
     idade: 27
 };
@@ -136,9 +188,9 @@ var usuario = {
         -> Ponto normal (<= 8)
         -> Fora do horário (> 8)
 */
-var funcionarios = {
+let funcionarios = {
     supervisores: ['Jorge', 'Maria'],
-    baterPonto: function (horario) {
+    baterPonto(horario) {
         if (horario <= 8) {
             return 'Ponto normal';
         }
@@ -147,9 +199,9 @@ var funcionarios = {
         }
     }
 };
-var funcionarios2 = {
+let funcionarios2 = {
     supervisores: ['Jorge', 'Maria'],
-    baterPonto: function (horario) {
+    baterPonto(horario) {
         if (horario <= 8) {
             return 'Ponto normal';
         }
@@ -161,16 +213,16 @@ var funcionarios2 = {
 /* O exemplo acima é o mesmo do anterior, mas com o uso do alias, para deixar genérico o tipo */
 // ======= Union Types ======= // 
 // utiliza o '|' para 'ou', podendo ser dois tipos na mesma variável
-var nota = 10;
+let nota = 10;
 // ======= Null ======= //
-var altura = 12;
-var contaBancaria2 = {
+let altura = 12;
+let contaBancaria2 = {
     saldo: 3456,
-    depositar: function (valor) {
+    depositar(valor) {
         this.saldo += valor;
     }
 };
-var correntista2 = {
+let correntista2 = {
     nome: 'Ana Silva',
     contaBancaria: contaBancaria2,
     contatos: ['34567890', '98765432']

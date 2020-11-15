@@ -76,3 +76,24 @@ console.log(w);
 // o código abaixo é exatamente o mesmo, mas sem o recurso de destructuring 
 // const nome = item.nome;
 // const preco = item.preco;    
+
+
+// ======= Promises ======= //  
+// "promise" é uma promessa, algo que chegará no futuro
+// é uma das formas para trabalhar com assincronismo
+// Ex:
+function esperar3sPromise() {
+    return new Promise((resolve: any) => {
+        setTimeout(() => {
+            resolve('3s depois promise...')
+        }, 3000)    
+    })
+}   
+
+esperar3sPromise().then(dado => console.log(dado));
+
+// Ex de request usando promise:
+fetch('https://swapi.dev/api/people/1')
+    .then(res => res.json())
+    .then(dados => console.log(dados)) 
+    .catch(err => console.log('Catch: ' + err))
