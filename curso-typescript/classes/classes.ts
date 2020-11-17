@@ -172,3 +172,177 @@ class Matematica {
 }
 
 console.log(Matematica.areaCirc(4));
+
+
+// ======= Classe abstrata ======= //
+// não pode ser instanciada
+// uma classe abstrata é feita para ser herdada
+// Ex:
+abstract class Calculo {
+    protected resultado: number = 0;
+
+    abstract executar (...numeros: number[]): void // método abstrato
+
+    getResultado(): number {
+        return this.resultado;
+    }
+}
+
+class Soma extends Calculo {
+    executar (...numeros: number[]): void {
+        this.resultado = numeros.reduce((total, valorAtual) => total + valorAtual);
+    }
+}
+
+class Multiplicacao extends Calculo {
+    executar (...numeros: number[]): void {
+        this.resultado = numeros.reduce((total, valorAtual) => total * valorAtual);
+    }
+}
+
+let c1 = new Soma;
+c1.executar(2, 3, 4, 5);
+console.log(c1.getResultado());
+
+
+// ======= Construtor privado & Singleton ======= //
+// Singleton é quando você quer trabalhar apenas um uma instância
+// Ex:
+class Unico {
+    private static instance: Unico = new Unico;
+    private constructor() {}
+
+    static getInstance(): Unico {
+        return Unico.instance;
+    }
+
+    agora() {
+        return new Date;
+    }
+}
+
+console.log(Unico.getInstance().agora());
+
+
+// ======= Somente Leitura ======= //
+// readonly - utilizado para propriedades de somente leitura
+// Ex:
+class Aviao {
+    public readonly modelo: string
+
+    constructor(
+        modelo: string,
+        public readonly prefixo: string
+    ) {
+        this.modelo = modelo;
+    }
+}
+
+const turboHelice = new Aviao('Tu-114', 'PT-ABC');
+// turboHelice.modelo = 'DC-8'; gera erro pois modelo é apenas para leitura
+
+
+
+
+// Exercício 1 - Classe
+// function Moto(nome) {
+//     this.nome = nome
+//     this.velocidade = 0
+ 
+//     this.buzinar = function() {
+//         console.log('Toooooooooot!')
+//     }
+ 
+//     this.acelerar= function(delta) {
+//         this.velocidade = this.velocidade + delta
+//     }
+// }
+
+// var moto = new Moto('Ducati')
+// moto.buzinar()
+// console.log(moto.velocidade)
+// moto.acelerar(30)
+// console.log(moto.velocidade)
+
+class Moto {
+    public velocidade: number = 0;
+
+    constructor (nome: string) {}
+    
+    buzinar(): void {
+        console.log('Toooooooooot!')
+    }
+
+    acelerar(delta: number): void {
+        this.velocidade = this.velocidade + delta
+    }
+}
+ 
+// Exercício 2 - Herança
+// var objeto2D = {
+//     base: 0,
+//     altura: 0
+// }
+ 
+// var retangulo = Object.create(objeto2D)
+// retangulo.base = 5
+// retangulo.altura = 7
+// retangulo.area = function() {
+//     return this.base * this.altura
+// }
+// console.log(retangulo.area())
+
+abstract class Objeto2D {
+    public base: number = 0;
+    public altura: number = 0;
+
+    abstract area(): number
+}
+
+class Retangulo extends Objeto2D {
+    area(): number {
+        return this.base * this.altura;
+    }
+}
+ 
+// Exercício 3 - Getters & Setters
+// var estagiario = {
+//     _primeiroNome: ''
+// }
+ 
+// Object.defineProperty(estagiario, 'primeiroNome', {
+//     get: function () {
+//         return this._primeiroNome
+//     },
+//     set: function (valor) {
+//         if (valor.length >= 3) {
+//             this._primeiroNome = valor
+//         } else {
+//             this._primeiroNome = ''
+//         }
+//     },
+//     enumerable: true,
+//     configurable: true
+// })
+ 
+// console.log(estagiario.primeiroNome)
+// estagiario.primeiroNome = 'Le'
+// console.log(estagiario.primeiroNome)
+// estagiario.primeiroNome = 'Leonardo'
+// console.log(estagiario.primeiroNome)
+
+class Estagiario {
+    private _primeiroNome: string = '';
+
+    get primeiroNome() {
+        return this._primeiroNome;
+    }
+
+    set primeiroNome(valor) {
+        if (valor.length >= 3) {
+            this._primeiroNome = valor;
+        } else {
+            this._primeiroNome = '';
+        }
+    }
+}

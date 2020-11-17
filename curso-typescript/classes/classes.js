@@ -152,4 +152,192 @@ const pessoa1 = new Pessoa;
 console.log(pessoa1);
 pessoa1.idade = 10;
 console.log(pessoa1);
-console.log(pessoa1.idade); */ 
+console.log(pessoa1.idade); */
+// ======= Membros estáticos ======= //
+// quando um atributo é estático, quer dizer que o seu valor é associado a classe e não a cada instância
+// com o static é possível acessar o método dentro da classe sem criar uma instância
+// quando o atributo e o método estão 'static', quer dizer que ambos estão no nível de acesso da classe e não de cada instância
+// Ex:
+var Matematica = /** @class */ (function () {
+    function Matematica() {
+    }
+    Matematica.areaCirc = function (raio) {
+        return this.PI * raio * raio;
+    };
+    Matematica.PI = 3.1416;
+    return Matematica;
+}());
+console.log(Matematica.areaCirc(4));
+// ======= Classe abstrata ======= //
+// não pode ser instanciada
+// uma classe abstrata é feita para ser herdada
+// Ex:
+var Calculo = /** @class */ (function () {
+    function Calculo() {
+        this.resultado = 0;
+    }
+    Calculo.prototype.getResultado = function () {
+        return this.resultado;
+    };
+    return Calculo;
+}());
+var Soma = /** @class */ (function (_super) {
+    __extends(Soma, _super);
+    function Soma() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    Soma.prototype.executar = function () {
+        var numeros = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            numeros[_i] = arguments[_i];
+        }
+        this.resultado = numeros.reduce(function (total, valorAtual) { return total + valorAtual; });
+    };
+    return Soma;
+}(Calculo));
+var Multiplicacao = /** @class */ (function (_super) {
+    __extends(Multiplicacao, _super);
+    function Multiplicacao() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    Multiplicacao.prototype.executar = function () {
+        var numeros = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            numeros[_i] = arguments[_i];
+        }
+        this.resultado = numeros.reduce(function (total, valorAtual) { return total * valorAtual; });
+    };
+    return Multiplicacao;
+}(Calculo));
+var c1 = new Soma;
+c1.executar(2, 3, 4, 5);
+console.log(c1.getResultado());
+// ======= Construtor privado & Singleton ======= //
+// Singleton é quando você quer trabalhar apenas um uma instância
+// Ex:
+var Unico = /** @class */ (function () {
+    function Unico() {
+    }
+    Unico.getInstance = function () {
+        return Unico.instance;
+    };
+    Unico.prototype.agora = function () {
+        return new Date;
+    };
+    Unico.instance = new Unico;
+    return Unico;
+}());
+console.log(Unico.getInstance().agora());
+// ======= Somente Leitura ======= //
+// readonly - utilizado para propriedades de somente leitura
+// Ex:
+var Aviao = /** @class */ (function () {
+    function Aviao(modelo, prefixo) {
+        this.prefixo = prefixo;
+        this.modelo = modelo;
+    }
+    return Aviao;
+}());
+var turboHelice = new Aviao('Tu-114', 'PT-ABC');
+// turboHelice.modelo = 'DC-8'; gera erro pois modelo é apenas para leitura
+// Exercício 1 - Classe
+// function Moto(nome) {
+//     this.nome = nome
+//     this.velocidade = 0
+//     this.buzinar = function() {
+//         console.log('Toooooooooot!')
+//     }
+//     this.acelerar= function(delta) {
+//         this.velocidade = this.velocidade + delta
+//     }
+// }
+// var moto = new Moto('Ducati')
+// moto.buzinar()
+// console.log(moto.velocidade)
+// moto.acelerar(30)
+// console.log(moto.velocidade)
+var Moto = /** @class */ (function () {
+    function Moto(nome) {
+        this.velocidade = 0;
+    }
+    Moto.prototype.buzinar = function () {
+        console.log('Toooooooooot!');
+    };
+    Moto.prototype.acelerar = function (delta) {
+        this.velocidade = this.velocidade + delta;
+    };
+    return Moto;
+}());
+// Exercício 2 - Herança
+// var objeto2D = {
+//     base: 0,
+//     altura: 0
+// }
+// var retangulo = Object.create(objeto2D)
+// retangulo.base = 5
+// retangulo.altura = 7
+// retangulo.area = function() {
+//     return this.base * this.altura
+// }
+// console.log(retangulo.area())
+var Objeto2D = /** @class */ (function () {
+    function Objeto2D() {
+        this.base = 0;
+        this.altura = 0;
+    }
+    return Objeto2D;
+}());
+var Retangulo = /** @class */ (function (_super) {
+    __extends(Retangulo, _super);
+    function Retangulo() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    Retangulo.prototype.area = function () {
+        return this.base * this.altura;
+    };
+    return Retangulo;
+}(Objeto2D));
+// Exercício 3 - Getters & Setters
+// var estagiario = {
+//     _primeiroNome: ''
+// }
+// Object.defineProperty(estagiario, 'primeiroNome', {
+//     get: function () {
+//         return this._primeiroNome
+//     },
+//     set: function (valor) {
+//         if (valor.length >= 3) {
+//             this._primeiroNome = valor
+//         } else {
+//             this._primeiroNome = ''
+//         }
+//     },
+//     enumerable: true,
+//     configurable: true
+// })
+// console.log(estagiario.primeiroNome)
+// estagiario.primeiroNome = 'Le'
+// console.log(estagiario.primeiroNome)
+// estagiario.primeiroNome = 'Leonardo'
+// console.log(estagiario.primeiroNome)
+var Estagiario = /** @class */ (function () {
+    function Estagiario() {
+        this._primeiroNome = '';
+    }
+    Object.defineProperty(Estagiario.prototype, "primeiroNome", {
+        get: function () {
+            return this._primeiroNome;
+        },
+        set: function (valor) {
+            if (valor.length >= 3) {
+                this._primeiroNome = valor;
+            }
+            else {
+                this._primeiroNome = '';
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return Estagiario;
+}());
