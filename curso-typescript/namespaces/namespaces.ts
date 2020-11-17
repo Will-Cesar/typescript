@@ -1,6 +1,8 @@
 // ======= Namespaces ======= //    
 // esquema de organização onde não ocorre o problema de duplicação de nomes com outros objetos dentro do contexto
+// organização feita com objetos
 // também é possível utilizar Namespace em multiplos arquivos, utilizando o mesmo nome
+// não há necessidade de loaders, o próprio typescript consegue compilar o mesmo para funcionar no browser
 // Ex:
 namespace Areas {
     const PI = 3.14;

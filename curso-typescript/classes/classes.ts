@@ -267,7 +267,7 @@ const turboHelice = new Aviao('Tu-114', 'PT-ABC');
 class Moto {
     public velocidade: number = 0;
 
-    constructor (nome: string) {}
+    // constructor (nome: string) {}
     
     buzinar(): void {
         console.log('Toooooooooot!')

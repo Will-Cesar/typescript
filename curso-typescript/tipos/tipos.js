@@ -1,15 +1,15 @@
 "use strict";
 // ======= string ======= //
-var nome = 'João';
+let nome = 'João';
 console.log(nome);
 // ======= number ======= //
-var idade = 27;
+let idade = 27;
 console.log(idade);
 // ======= boolean ======= //
-var possuiHobbies = false;
+let possuiHobbies = false;
 console.log(possuiHobbies);
 // ======= tipos explicitos ======= //
-var minhaIdade;
+let minhaIdade;
 minhaIdade = 27;
 console.log(typeof minhaIdade);
 minhaIdade = 'idade é 27';
@@ -19,12 +19,12 @@ console.log(typeof minhaIdade);
    determina o tipo da mesma conforme a declaração de valores na propria variável.
 */
 // ======= array ======= //
-var hobbies = ['Cozinhar', 'Praticar Esportes'];
+let hobbies = ['Cozinhar', 'Praticar Esportes'];
 console.log(hobbies);
 console.log(typeof hobbies);
 hobbies = [100, 200];
 // ======= tuplas ======= //
-var endereco = ['Av Principal', 99];
+let endereco = ['Av Principal', 99];
 console.log(endereco);
 // ======= enums ======= //
 // estrutura que define valores pré-definidos
@@ -34,10 +34,10 @@ var Cor;
     Cor[Cor["Verde"] = 1] = "Verde";
     Cor[Cor["Azul"] = 2] = "Azul"; // = 2
 })(Cor || (Cor = {}));
-var minhaCor = Cor.Verde;
+let minhaCor = Cor.Verde;
 console.log(minhaCor);
 // ======= any ======= //
-var carro = 'BMW';
+let carro = 'BMW';
 console.log(carro);
 // ======= funções ======= //
 function retornaMeuNome() {
@@ -53,13 +53,13 @@ function multiplicar(numA, numB) {
 console.log(multiplicar(4, 8));
 // ======= tipo função ======= //
 // nessa demonstração, foi tipado em uma variável uma função
-var calculo;
+let calculo;
 calculo = multiplicar;
 console.log(calculo(5, 6));
 // ======= objetos ======= //
 // conforme toda a regra de typescript, uma vez criado um objeto, ja inicializando a variável com propriedades pré definidas
 // essa váriavel fica com a tipagem já definida
-var usuario = {
+let usuario = {
     nome: 'João',
     idade: 27
 };
@@ -71,9 +71,9 @@ var usuario = {
         -> Ponto normal (<= 8)
         -> Fora do horário (> 8)
 */
-var funcionarios = {
+let funcionarios = {
     supervisores: ['Jorge', 'Maria'],
-    baterPonto: function (horario) {
+    baterPonto(horario) {
         if (horario <= 8) {
             return 'Ponto normal';
         }
@@ -82,9 +82,9 @@ var funcionarios = {
         }
     }
 };
-var funcionarios2 = {
+let funcionarios2 = {
     supervisores: ['Jorge', 'Maria'],
-    baterPonto: function (horario) {
+    baterPonto(horario) {
         if (horario <= 8) {
             return 'Ponto normal';
         }
@@ -96,19 +96,20 @@ var funcionarios2 = {
 /* O exemplo acima é o mesmo do anterior, mas com o uso do alias, para deixar genérico o tipo */
 // ======= Union Types ======= // 
 // utiliza o '|' para 'ou', podendo ser dois tipos na mesma variável
-var nota = 10;
+let nota = 10;
 // ======= Null ======= //
-var altura = 12;
-var contaBancaria2 = {
+let altura = 12;
+let contaBancaria2 = {
     saldo: 3456,
-    depositar: function (valor) {
+    depositar(valor) {
         this.saldo += valor;
     }
 };
-var correntista2 = {
+let correntista2 = {
     nome: 'Ana Silva',
     contaBancaria: contaBancaria2,
     contatos: ['34567890', '98765432']
 };
 correntista2.contaBancaria.depositar(3000);
 console.log(correntista2);
+//# sourceMappingURL=tipos.js.map
