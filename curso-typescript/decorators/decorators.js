@@ -36,4 +36,62 @@ function decoratorEx(a, b) {
         console.log(a + ' ' + b);
     };
 }
+// Desafio Decorator perfilAdmin
+const usuarioLogado = {
+    nome: 'Guilherme Filho',
+    email: 'guigui@gmail.com',
+    admin: false
+};
+let MudancaAdministrativa = class MudancaAdministrativa {
+    critico() {
+        console.log('Algo crítico foi alterado!');
+    }
+};
+MudancaAdministrativa = __decorate([
+    perfilAdmin
+], MudancaAdministrativa);
+new MudancaAdministrativa().critico();
+// resolução do desafio
+function perfilAdmin(construtor) {
+    return class extends construtor {
+        constructor(...args) {
+            super(...args);
+            if (!usuarioLogado || usuarioLogado.admin) {
+                throw new Error('Sem permissão!');
+            }
+        }
+    };
+}
+// ======= Decorator de método ======= //
+class ContaCorrente {
+    constructor(saldo) {
+        this.saldo = saldo;
+    }
+    sacar(valor) {
+        if (valor <= this.saldo) {
+            this.saldo -= valor;
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    getSaldo() {
+        return this.saldo;
+    }
+}
+__decorate([
+    congelar
+], ContaCorrente.prototype, "sacar", null);
+__decorate([
+    congelar
+], ContaCorrente.prototype, "getSaldo", null);
+const cc = new ContaCorrente(10248.57);
+cc.sacar(5000);
+console.log(cc.getSaldo());
+function congelar(alvo, nomePropriedade, descritor) {
+    console.log(alvo);
+    console.log(nomePropriedade);
+    descritor.writable = false;
+}
 //# sourceMappingURL=decorators.js.map
