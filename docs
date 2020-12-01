@@ -48,3 +48,10 @@ Criando um projeto TS com Gulp (passo a posso):
 Usando uma biblioteca JS com TS e gulp (passo a passo)
 Exemplo instalando JQuery:
 - npm i --save-dev jquery @types/jquery
+
+Criando um projeto TS com Webpack (passo a posso):
+- tsc --init
+- npm init -y
+- npm i -D webpack webpack-cli typescript ts-loader jquery @types/jquery
+- criar e configurar o arquivo webpack.config.js
+- npm i -D copy-webpack-plugin (plugin de criação de cópia de arquivos)
