@@ -81,6 +81,9 @@ class ContaCorrente {
     }
 }
 __decorate([
+    naoNegativo
+], ContaCorrente.prototype, "saldo", void 0);
+__decorate([
     congelar
 ], ContaCorrente.prototype, "sacar", null);
 __decorate([
@@ -93,5 +96,23 @@ function congelar(alvo, nomePropriedade, descritor) {
     console.log(alvo);
     console.log(nomePropriedade);
     descritor.writable = false;
+}
+// ======= Decorator de Atributo ======= //
+// Ex:
+function naoNegativo(alvo, nomePropriedade) {
+    delete alvo[nomePropriedade];
+    Object.defineProperty(alvo, nomePropriedade, {
+        get: function () {
+            return alvo["_" + nomePropriedade];
+        },
+        set: function (valor) {
+            if (valor < 0) {
+                throw new Error('Saldo inválido');
+            }
+            else {
+                alvo["_" + nomePropriedade] = valor;
+            }
+        }
+    });
 }
 //# sourceMappingURL=decorators.js.map

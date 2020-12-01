@@ -168,8 +168,7 @@ console.log(c1.getResultado());
 // Singleton é quando você quer trabalhar apenas um uma instância
 // Ex:
 class Unico {
-    constructor() {
-    }
+    constructor() { }
     static getInstance() {
         return Unico.instance;
     }

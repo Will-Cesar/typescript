@@ -1,5 +1,4 @@
-comandos:
-
+Comandos:
 tsc -v: verifica a versão do typescript instalado;
 tsc --init: configura o arquivo de inicio do tsc;
 tsc nome-do-arquivo.ts: compila o código ts para js puro de forma manual, e cria um arquivo .js na mesma pasta;
@@ -10,7 +9,7 @@ Compilar de forma automatica
 - instalar o ts-node - npm i -g ts-node
 - ctrl + alt + n -> executa o code runner e compila os arquivos. Usar esse código no arquivo que deseja ser compilado
 
-live server:
+Live server:
 - pacote para criar uma servidor e rodar com o protocolo http
 - npm i -s live-server  
 - ir no package.json, dentro dos "scripts" -> "start" colocar o "live-server"
@@ -20,3 +19,32 @@ Complicar com live server:
 - abrir dois terminais
 - um utilizar o comando "tsc -w", que fica esperando alterações dos arquivos .ts para compilar e atualizar o arquivo .js
 - e utilizar o comando "npm start" para rodar o servidor 
+
+Usando JQuery com Typescript:
+- há uma maneira declarativa para o typescript entender o uso do jquery no código, e parando de dar erro de compilação
+- usar a variável "Declare"
+- declarar no começo do arquivo
+ex: declare const $: any;
+
+@types:
+- é um namespace dentro do npm referenciados aos tipos do typescript
+- para de dar erros em relação a compilação
+- comando: npm i --save-dev @types/jquery
+
+TypeSearch:
+- site de referencia para definir os tipos públicos e arrumar os erros de compilação quando utilizar bibliotecas JS com TS
+- https://www.typescriptlang.org/dt/search?search=
+
+Criando um projeto TS com Gulp (passo a posso):
+- tsc --init
+- npm init -y
+- npm i --save-dev gulp typescript browserify tsify vinyl-source-stream del
+- criar e configurar arquivo gulpfile.js
+- criar pastas "public" e "src"
+- dentro da pasta "src" criar um arquivo "main.ts"
+- dentro da pasta "public" criar um arquivo index.html e referenciar o arquivo "app.js" que será gerado pós compilação
+- npm run build
+
+Usando uma biblioteca JS com TS e gulp (passo a passo)
+Exemplo instalando JQuery:
+- npm i --save-dev jquery @types/jquery
