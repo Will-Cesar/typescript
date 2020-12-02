@@ -55,3 +55,8 @@ Criando um projeto TS com Webpack (passo a posso):
 - npm i -D webpack webpack-cli typescript ts-loader jquery @types/jquery
 - criar e configurar o arquivo webpack.config.js
 - npm i -D copy-webpack-plugin (plugin de criação de cópia de arquivos)
+- npm run build
+
+Criando um projeto React com TS (passo a posso):
+- npx create-react-app name-of-app --template typescript
+- npm start
